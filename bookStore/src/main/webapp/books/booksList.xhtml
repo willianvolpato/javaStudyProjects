@@ -33,34 +33,30 @@
 		</nav>
 		<div class="container">
 			<h1 class="display-4">Listagem de livros</h1>
-				
-				
-				<h:dataTable class="table table-hover" var="book" value="#{adminListBooksBean.books}">
-					<h:column>
-						<f:facet name="header" scope="col">Título</f:facet>
-						#{book.title}
-					</h:column>
-					<h:column>
-						<f:facet name="header" scope="col">Descrição</f:facet>
-						#{book.description}
-					</h:column>
-					<h:column>
-						<f:facet name="header" scope="col">Páginas</f:facet>
-						#{book.pages}
-					</h:column>
-					<h:column>
-						<f:facet name="header" scope="col">Preço</f:facet>
-						#{book.price}
-					</h:column>
-					<h:column>
-						<f:facet name="header" scope="col">Autores</f:facet>
-						<ui:repeat var="author" value="#{book.authors}">
-							#{author.name}<br />
-						</ui:repeat>
-					</h:column>
-				</h:dataTable>
-				
-				
+			<h:dataTable class="table table-hover" var="book" value="#{adminListBooksBean.books}">
+				<h:column>
+					<f:facet name="header" scope="col">Título</f:facet>
+					#{book.title}
+				</h:column>
+				<h:column>
+					<f:facet name="header" scope="col">Descrição</f:facet>
+					#{book.description}
+				</h:column>
+				<h:column>
+					<f:facet name="header" scope="col">Páginas</f:facet>
+					#{book.pages}
+				</h:column>
+				<h:column>
+					<f:facet name="header" scope="col">Preço</f:facet>
+					#{book.price}
+				</h:column>
+				<h:column>
+					<f:facet name="header" scope="col">Autores</f:facet>
+					<ui:repeat var="author" value="#{book.authors}">
+						#{author.name}<br />
+					</ui:repeat>
+				</h:column>
+			</h:dataTable>
 		</div>
 	</body>
 </html>
