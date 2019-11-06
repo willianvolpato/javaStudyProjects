@@ -13,6 +13,24 @@
 		<script type="text/javascript" src="../assets/scripts/bootstrap.js"></script>
 	</head>
 	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			<div class="collapse navbar-collapse right" id="navbarTogglerDemo01">
+				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+					<li class="nav-item">
+						<a class="nav-link" href="#">Início</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Cadastrar livro</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Cadastrar autor</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Listar livros</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
 		<div class="container">
 			<h1 class="display-4">Cadastrar novo livro</h1>
 			<h:form>
@@ -23,6 +41,12 @@
 				<div class="form-group">
 					<h:outputLabel for="description" value="Descrição:" />
 					<h:inputTextarea class="form-control" id="description" rows="3" value="#{adminBooksBean.book.description}" />
+				</div>
+				<div class="form-group">
+					<h:outputLabel for="authors" value="Autores:" />
+					<h:selectManyListbox class="form-control" id="authors" value="#{adminBooksBean.authorsId}" converter="javax.faces.Integer">
+						<f:selectItems value="#{adminBooksBean.authors}" var="author" itemValue="#{author.id}" itemLabel="#{author.name}" />
+					</h:selectManyListbox>
 				</div>
 				<div class="form-row">
 					<div class="form-group col-md-2">
