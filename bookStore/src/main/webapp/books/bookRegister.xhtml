@@ -36,28 +36,37 @@
 		<div class="container">
 			<h1 class="display-4">Cadastrar novo livro</h1>
 			<h:form>
+				<h:panelGroup rendered="#{!facesContext.messageList.isEmpty()}">
+				<div class="alert alert-warning" role="alert">
+					<h:messages />
+				</div>
+			</h:panelGroup>
 				<div class="form-group">
 					<h:outputLabel for="title" value="Título:" />
-					<h:inputText class="form-control" id="title" value="#{adminBooksBean.book.title}" />
+					<h:inputText class="form-control" id="title" value="#{adminBooksBean.book.title}" required="true"/>
 				</div>
 				<div class="form-group">
 					<h:outputLabel for="description" value="Descrição:" />
-					<h:inputTextarea class="form-control" id="description" rows="3" value="#{adminBooksBean.book.description}" />
+					<h:inputTextarea class="form-control" id="description" rows="3" value="#{adminBooksBean.book.description}" required="true"/>
 				</div>
 				<div class="form-group">
 					<h:outputLabel for="authors" value="Autores:" />
-					<h:selectManyListbox class="form-control" id="authors" value="#{adminBooksBean.authorsId}" converter="javax.faces.Integer">
+					<h:selectManyListbox class="form-control" id="authors" value="#{adminBooksBean.authorsId}" converter="javax.faces.Integer" required="true" requiredMessage="É necessário selecionar um autor">
 						<f:selectItems value="#{adminBooksBean.authors}" var="author" itemValue="#{author.id}" itemLabel="#{author.name}" />
 					</h:selectManyListbox>
 				</div>
 				<div class="form-row">
 					<div class="form-group col-md-2">
 						<h:outputLabel for="pages" value="Páginas:" />
-						<h:inputText class="form-control" id="pages" value="#{adminBooksBean.book.pages}" />
+						<h:inputText class="form-control" id="pages" value="#{adminBooksBean.book.pages}" required="true" requiredMessage="O número de páginas não foi informado">
+							<f:validateDoubleRange minimum="1" />
+						</h:inputText>
 					</div>
 					<div class="form-group col-md-2">
 						<h:outputLabel for="price" value="Preço:" />
-						<h:inputText class="form-control" id="price" value="#{adminBooksBean.book.price}" />
+						<h:inputText class="form-control" id="price" value="#{adminBooksBean.book.price}" required="true" requiredMessage="O preço não foi informado">
+							<f:validateDoubleRange minimum="0.01" />
+						</h:inputText>
 					</div>
 				</div>
 				<h:commandButton class="btn btn-primary" value="Cadastrar" action="#{adminBooksBean.save}" />

@@ -38,7 +38,7 @@
 			<h:form>
 				<div class="form-group">
 					<h:outputLabel for="name" value="Nome:" />
-					<h:inputText class="form-control" id="nome" value="#{adminAuthorBean.author.name}" />
+					<h:inputText class="form-control" id="nome" value="#{adminAuthorBean.author.name}" required="true" requiredMessage="É necessário informar o nome do autor" />
 				</div>
 				<h:commandButton class="btn btn-primary" value="Cadastrar" action="#{adminAuthorBean.save}" />
 			</h:form>
