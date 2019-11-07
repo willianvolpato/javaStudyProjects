@@ -5,8 +5,10 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:f="http://xmlns.jcp.org/jsf/core">
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf">
 	<head>
+		<meta charset="UTF-8" />
 		<title>Cadastrar novo livro</title>
 		<link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
 		<script type="text/javascript" src="../assets/scripts/jquery-3.3.1.js"></script>
@@ -17,22 +19,27 @@
 			<div class="collapse navbar-collapse right" id="navbarTogglerDemo01">
 				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
 					<li class="nav-item">
-						<a class="nav-link" href="#">Início</a>
+						<a class="nav-link" jsf:outcome="#">Início</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Cadastrar livro</a>
+						<a class="nav-link" jsf:outcome="/books/bookRegister">Cadastrar livro</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Cadastrar autor</a>
+						<a class="nav-link" jsf:outcome="/authors/authorRegister">Cadastrar autor</a>
 					</li>
 					<li class="nav-item">
-						<a class="nav-link" href="#">Listar livros</a>
+						<a class="nav-link" jsf:outcome="/books/booksList">Listar livros</a>
 					</li>
 				</ul>
 			</div>
 		</nav>
 		<div class="container">
 			<h1 class="display-4">Listagem de livros</h1>
+			<h:panelGroup rendered="#{!facesContext.messageList.isEmpty()}">
+				<div class="alert alert-success" role="alert">
+					<h:messages />
+				</div>
+			</h:panelGroup>
 			<h:dataTable class="table table-hover" var="book" value="#{adminListBooksBean.books}">
 				<h:column>
 					<f:facet name="header" scope="col">Título</f:facet>
