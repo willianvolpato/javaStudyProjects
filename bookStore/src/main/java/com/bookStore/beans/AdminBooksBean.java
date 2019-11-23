@@ -1,5 +1,6 @@
 package com.bookStore.beans;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,10 +9,12 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.http.Part;
 import javax.transaction.Transactional;
 
 import com.bookStore.DAO.AuthorDAO;
 import com.bookStore.DAO.BookDAO;
+import com.bookStore.infra.FileSaver;
 import com.bookStore.models.Author;
 import com.bookStore.models.Book;
 
@@ -19,17 +22,21 @@ import com.bookStore.models.Book;
 @RequestScoped
 public class AdminBooksBean {
 
+	@Inject
+	private FacesContext facesContext;
 	private Book book = new Book();
 	@Inject
 	private BookDAO bookDAO;
 	@Inject
 	private AuthorDAO authorDAO;
 	private List<Integer> authorsId = new ArrayList<>();
-	@Inject
-	private FacesContext facesContext;
+	private Part fileBookCover;
 
 	@Transactional
-	public String save() {
+	public String save() throws IOException {
+		
+		book.setCover(FileSaver.write(fileBookCover, "BooksCovers/"));
+		
 		for (Integer authorId : authorsId) {
 			book.getAuthors().add(new Author(authorId));
 		}
@@ -60,5 +67,14 @@ public class AdminBooksBean {
 	public void setAuthorsId(List<Integer> authorsId) {
 		this.authorsId = authorsId;
 	}
+
+	public Part getFileBookCover() {
+		return fileBookCover;
+	}
+
+	public void setFileBookCover(Part fileBookCover) {
+		this.fileBookCover = fileBookCover;
+	}
+
 
 }

@@ -35,7 +35,7 @@
 		</nav>
 		<div class="container">
 			<h1 class="display-4">Cadastrar novo livro</h1>
-			<h:form>
+			<h:form enctype="multipart/form-data">
 				<h:panelGroup rendered="#{!facesContext.messageList.isEmpty()}">
 				<div class="alert alert-warning" role="alert">
 					<h:messages />
@@ -51,7 +51,7 @@
 				</div>
 				<div class="form-group">
 					<h:outputLabel for="authors" value="Autores:" />
-					<h:selectManyListbox class="form-control" id="authors" value="#{adminBooksBean.authorsId}" converter="javax.faces.Integer" required="true" requiredMessage="É necessário selecionar um autor">
+					<h:selectManyListbox class="form-control" id="authors" value="#{adminBooksBean.authorsId}" converter="javax.faces.Integer" required="true" requiredMessage="É necessário selecionar um autor" size="5">
 						<f:selectItems value="#{adminBooksBean.authors}" var="author" itemValue="#{author.id}" itemLabel="#{author.name}" />
 					</h:selectManyListbox>
 				</div>
@@ -69,6 +69,13 @@
 						</h:inputText>
 					</div>
 				</div>
+				
+				<div class="custom-file" style="margin-bottom: 1rem">
+					<h:inputFile value="#{adminBooksBean.fileBookCover}" id="bookCover" class="custom-file-input" />
+					<h:outputLabel class="custom-file-label" for="bookCover" value="Escolher arquivo" />
+					<h:message for="bookCover" />
+				</div>
+				
 				<h:commandButton class="btn btn-primary" value="Cadastrar" action="#{adminBooksBean.save}" />
 			</h:form>
 		</div>

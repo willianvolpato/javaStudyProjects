@@ -24,6 +24,7 @@ public class Book {
 	private BigDecimal price;
 	@ManyToMany
 	private List<Author> authors = new ArrayList<>();
+	private String cover;
 
 	public Integer getId() {
 		return id;
@@ -73,10 +74,18 @@ public class Book {
 		this.authors = authors;
 	}
 
+	public String getCover() {
+		return cover;
+	}
+
+	public void setCover(String cover) {
+		this.cover = cover;
+	}
+
 	@Override
 	public String toString() {
 		return "Book [id=" + id + ", title=" + title + ", description=" + description + ", pages=" + pages + ", price="
-				+ price + ", authors=" + authors + "]";
+				+ price + ", authors=" + authors + ", cover=" + cover + "]";
 	}
 
 }
