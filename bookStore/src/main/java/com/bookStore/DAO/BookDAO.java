@@ -17,7 +17,15 @@ public class BookDAO {
 	}
 
 	public List<Book> list() {
-		return entityManager.createQuery("SELECT DISTINCT(b) FROM Book b JOIN FETCH b.authors", Book.class).getResultList();
+		return entityManager.createQuery("SELECT DISTINCT(b) FROM Book b JOIN FETCH b.authors ORDER BY b.id DESC", Book.class).getResultList();
+	}
+
+	public List<Book> lastReleases() {
+		return entityManager.createQuery("SELECT b FROM Book b ORDER BY b.publicationDate DESC", Book.class).setMaxResults(5).getResultList();
+	}
+
+	public List<Book> allBooks() {
+		return entityManager.createQuery("SELECT b FROM Book b", Book.class).getResultList();
 	}
 
 }

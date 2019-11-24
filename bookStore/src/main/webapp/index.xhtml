@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Início</title>
+		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css" />
+		<script type="text/javascript" src="assets/scripts/jquery-3.3.1.js"></script>
+		<script type="text/javascript" src="assets/scripts/bootstrap.js"></script>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			<div class="collapse navbar-collapse right">
+				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+					<li class="nav-item">
+						<a class="nav-link" jsf:outcome="/index.xhtml">Início</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" jsf:outcome="/books/bookRegister">Cadastrar livro</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" jsf:outcome="/authors/authorRegister">Cadastrar autor</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" jsf:outcome="/books/booksList">Listar livros</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<div class="container-fluid" style="margin-top: 50px">
+			<div class="container">
+				<h1 class="display-4">Últimos Lançamentos</h1>
+			</div>
+			<hr />
+			<div class="container-fluid" style="margin: auto; display: flex; justify-content: center;">
+				<ul class="list-group list-group-horizontal">
+					<ui:repeat value="#{homeBean.lastReleases()}" var="book">
+						<li class="list-group-item" style="margin: 10px 10px">
+							<a href="#" title="#{book.title}">
+								<div class="text-center">
+									<img src="#{request.contextPath}/file/#{book.cover}" class="rounded" alt="#{book.title}" style="width:200px; height:280px; padding-bottom: 2px" />
+								</div>
+								<button type="button" class="btn btn-info" style="width: 200px;">#{book.title}</button>
+							</a>
+						</li>
+					</ui:repeat>
+				</ul>
+			</div>
+		</div>
+		<div class="container-fluid" style="margin-top: 50px">
+			<div class="container">
+				<h1 class="display-4">Todos os Livros</h1>
+			</div>
+			<hr />
+			<div class="container-fluid" style="margin: auto; display: flex; justify-content: center;">
+				<ul class="list-group list-group-horizontal" style="flex-wrap: wrap; justify-content: center;">
+					<ui:repeat value="#{homeBean.allBooks()}" var="book">
+						<li class="list-group-item" style="margin: 10px 10px">
+							<a href="#" title="#{book.title}">
+								<div class="text-center">
+									<img src="#{request.contextPath}/file/#{book.cover}" class="rounded" alt="#{book.title}" style="width:200px; height:280px; padding-bottom: 2px" />
+								</div>
+								<button type="button" class="btn btn-info" style="width: 200px;">#{book.title}</button>
+							</a>
+						</li>
+					</ui:repeat>
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>

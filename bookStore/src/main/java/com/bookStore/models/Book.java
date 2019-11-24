@@ -2,6 +2,7 @@ package com.bookStore.models;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Entity;
@@ -18,10 +19,12 @@ public class Book {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer id;
 	private String title;
+	private Date publicationDate;
 	@Lob
 	private String description;
 	private Integer pages;
 	private BigDecimal price;
+	
 	@ManyToMany
 	private List<Author> authors = new ArrayList<>();
 	private String cover;
@@ -40,6 +43,14 @@ public class Book {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+	
+	public Date getPublicationDate() {
+		return publicationDate;
+	}
+	
+	public void setPublicationDate(Date publicationDate) {
+		this.publicationDate = publicationDate;
 	}
 
 	public String getDescription() {
@@ -84,8 +95,9 @@ public class Book {
 
 	@Override
 	public String toString() {
-		return "Book [id=" + id + ", title=" + title + ", description=" + description + ", pages=" + pages + ", price="
-				+ price + ", authors=" + authors + ", cover=" + cover + "]";
+		return "Book [id=" + id + ", title=" + title + ", publicationDate=" + publicationDate + ", description="
+				+ description + ", pages=" + pages + ", price=" + price + ", authors=" + authors + ", cover=" + cover
+				+ "]";
 	}
 
 }

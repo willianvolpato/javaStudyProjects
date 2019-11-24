@@ -1,6 +1,7 @@
 package com.bookStore.beans;
 
 import java.io.IOException;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class AdminBooksBean {
 	@Transactional
 	public String save() throws IOException {
 		
+		book.setPublicationDate(new Date(System.currentTimeMillis()));
 		book.setCover(FileSaver.write(fileBookCover, "BooksCovers/"));
 		
 		for (Integer authorId : authorsId) {
