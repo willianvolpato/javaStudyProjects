@@ -28,4 +28,8 @@ public class BookDAO {
 		return entityManager.createQuery("SELECT b FROM Book b", Book.class).getResultList();
 	}
 
+	public Book loadBookById(Integer bookId) {
+		return entityManager.createQuery("SELECT b FROM Book b JOIN FETCH b.authors WHERE b.id = :id", Book.class).setParameter("id", bookId).getSingleResult();
+	}
+
 }

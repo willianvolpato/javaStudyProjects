@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Detalhes do livro</title>
+		<link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
+		<script type="text/javascript" src="../assets/scripts/jquery-3.3.1.js"></script>
+		<script type="text/javascript" src="../assets/scripts/bootstrap.js"></script>
+	</head>
+	<f:metadata>
+		<f:viewParam name="bookId" value="#{bookDetailBean.bookId}" />
+		<f:viewAction action="#{bookDetailBean.loadBook()}" />
+	</f:metadata>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			<div class="collapse navbar-collapse right">
+				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+					<li class="nav-item">
+						<a class="nav-link" jsf:outcome="/index.xhtml">Início</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" jsf:outcome="/books/bookRegister">Cadastrar livro</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" jsf:outcome="/authors/authorRegister">Cadastrar autor</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" jsf:outcome="/books/booksList">Listar livros</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<div class="container-fluid" style="margin-top: 50px">
+			<div class="container">
+				<h1 class="display-4">#{bookDetailBean.book.title}</h1>
+				<hr />
+			</div>
+			<div class="row">
+				<div class="col-5" style="margin: auto; display: flex; justify-content: flex-end;">
+					<img class="img-thumbnail" src="#{request.contextPath}/file/#{bookDetailBean.book.cover}" style="width: 500px; height: 750px;" />
+				</div>
+				<div class="col-6" style="margin: 50px 150px 0 0;">
+					<div>
+						<p class="h3">Descrição:</p>
+						<p>
+							#{bookDetailBean.book.description}
+						</p>
+					</div>
+					<div>
+						<p class="h3">Autores:</p>
+							<ui:repeat var="author" value="#{bookDetailBean.book.authors}">
+								#{author.name}<br />
+							</ui:repeat>
+					</div>
+					<div>
+						<p class="h3">Páginas:</p>
+							#{bookDetailBean.book.pages}
+					</div>
+					<div>
+						<p class="h3">Preço:</p>
+							R$ #{bookDetailBean.book.price}
+					</div>
+					<div>
+						<button type="button" class="btn btn-outline-primary btn-lg" style="padding: 15px 50px; font-size: 30px; font-weight: 500; Margin-top: 50px;">Comprar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>
