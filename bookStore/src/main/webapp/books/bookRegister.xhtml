@@ -14,6 +14,7 @@
 		<link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.css" />
 		<script type="text/javascript" src="../assets/scripts/jquery-3.3.1.js"></script>
 		<script type="text/javascript" src="../assets/scripts/bootstrap.js"></script>
+		<script src="https://bs-custom-file-input.netlify.com/dist/bs-custom-file-input.js"></script>
 	</head>
 	<body>
 		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -69,16 +70,19 @@
 							<f:validateDoubleRange minimum="0.01" />
 						</h:inputText>
 					</div>
+					<div class="col-md">
+						<h:outputLabel value="Capa do Livro:" />
+						<div class="custom-file" style="margin-bottom: 1rem">
+							<h:inputFile value="#{adminBooksBean.fileBookCover}" id="bookCover" class="custom-file-input" />
+							<h:outputLabel class="custom-file-label" for="bookCover" value="Escolher arquivo" />
+						</div>
+					</div>
 				</div>
-				
-				<div class="custom-file" style="margin-bottom: 1rem">
-					<h:inputFile value="#{adminBooksBean.fileBookCover}" id="bookCover" class="custom-file-input" />
-					<h:outputLabel class="custom-file-label" for="bookCover" value="Escolher arquivo" />
-					<h:message for="bookCover" />
-				</div>
-				
 				<h:commandButton class="btn btn-primary" value="Cadastrar" action="#{adminBooksBean.save}" />
 			</h:form>
 		</div>
 	</body>
+	<script>
+		bsCustomFileInput.init()
+	</script>
 </html>
