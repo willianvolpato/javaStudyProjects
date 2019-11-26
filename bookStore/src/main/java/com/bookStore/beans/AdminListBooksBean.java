@@ -10,7 +10,7 @@ import com.bookStore.DAO.BookDAO;
 import com.bookStore.models.Book;
 
 @Model
-public class adminListBooksBean {
+public class AdminListBooksBean {
 
 	@Inject
 	private BookDAO bookDAO;

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:jsf="http://xmlns.jcp.org/jsf"
+	lang="pt-BR">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Lista de livros</title>
+		<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css" />
+		<script type="text/javascript" src="assets/scripts/jquery-3.3.1.js"></script>
+		<script type="text/javascript" src="assets/scripts/bootstrap.js"></script>
+	</head>
+	<body>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+			<div class="collapse navbar-collapse right">
+				<ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+					<li class="nav-item">
+						<a class="nav-link" jsf:outcome="/index.xhtml">Início</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" jsf:outcome="/books/bookRegister">Cadastrar livro</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" jsf:outcome="/authors/authorRegister">Cadastrar autor</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" jsf:outcome="/books/booksList">Listar livros</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+		<div class="container-fluid">
+			<div class="container" style="margin-top: 30px; margin-bottom: 30px">
+				<h1 class="display-4">Carrinho de compras</h1>
+				<h:panelGroup rendered="#{!facesContext.messageList.isEmpty()}">
+					<div class="alert alert-success" role="alert">
+						<h:messages />
+					</div>
+				</h:panelGroup>
+			</div>
+			<div class="container-fluid">
+			<h:form style="margin: 0 80px 0 80px">
+				<h:dataTable class="table table-hover" var="cartItem" value="#{shoppingCart.items}">
+					<h:column>
+						<f:facet name="header" scope="col"  colspan="2">Item</f:facet>
+						<a jsf:outcome="/books/bookDetail.xhtml?bookId=#{cartItem.item.id}">
+							<img src="#{request.contextPath}/file/#{cartItem.item.cover}" alt="#{cartItem.item.title}" style="max-width:100px" />
+						</a>
+					</h:column>
+					<h:column>
+						#{cartItem.item.title}
+					</h:column>
+					<h:column>
+						<f:facet name="header" scope="col">Preço</f:facet>
+						R$ #{cartItem.item.price}
+					</h:column>
+					<h:column>
+						<f:facet name="header" scope="col">Qtd</f:facet>
+						#{cartItem.quantity}
+					</h:column>
+					<h:column>
+						<f:facet name="header" scope="col">Total</f:facet>
+						R$ #{shoppingCart.getItemTotal(cartItem)}
+					</h:column>
+					<h:column>
+						<h:commandButton class="btn btn-outline-danger" value="Remover" />
+					</h:column>
+				</h:dataTable>
+			</h:form>
+			</div>
+			<hr style="margin: 20px 200px;" />
+			<div class="container" style="display: flex; justify-content: flex-end;">
+				<p class="h2">Total: R$ #{shoppingCart.getOrderTotal()}</p>
+			</div>
+		</div>
+	</body>
+</html>

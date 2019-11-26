@@ -43,36 +43,44 @@
 				<h1 class="display-4">#{bookDetailBean.book.title}</h1>
 				<hr />
 			</div>
-			<div class="row">
-				<div class="col-5" style="margin: auto; display: flex; justify-content: flex-end;">
-					<img class="img-thumbnail" src="#{request.contextPath}/file/#{bookDetailBean.book.cover}" style="width: 500px; height: 750px;" />
+			<h:form>
+				<div class="row">
+					<div class="col-5" style="margin: auto; display: flex; justify-content: flex-end;">
+						<img class="img-thumbnail" src="#{request.contextPath}/file/#{bookDetailBean.book.cover}" style="width: 500px; height: 750px;" />
+					</div>
+					<div class="col-6" style="margin: 50px 150px 0 0;">
+						<div>
+							<p class="h3">Descrição:</p>
+							<p>
+								#{bookDetailBean.book.description}
+							</p>
+						</div>
+						<div>
+							<p class="h3">Autores:</p>
+								<ui:repeat var="author" value="#{bookDetailBean.book.authors}">
+									#{author.name}<br />
+								</ui:repeat>
+						</div>
+						<div>
+							<p class="h3">Páginas:</p>
+								#{bookDetailBean.book.pages}
+						</div>
+						<div>
+							<p class="h3">Preço:</p>
+								R$ #{bookDetailBean.book.price}
+						</div>
+						<div>
+							<p class="h3">Data de publicação:</p>
+								<h:outputText value="#{bookDetailBean.book.publicationDate}">
+									<f:convertDateTime pattern="dd/MM/yyyy" />
+								</h:outputText>
+						</div>
+						<div>
+							<h:commandButton class="btn btn-outline-primary btn-lg" style="padding: 15px 50px; font-size: 30px; font-weight: 500; Margin-top: 50px;" value="Comprar" action="#{shippingCartBean.addItem(bookDetailBean.bookId)}" />
+						</div>
+					</div>
 				</div>
-				<div class="col-6" style="margin: 50px 150px 0 0;">
-					<div>
-						<p class="h3">Descrição:</p>
-						<p>
-							#{bookDetailBean.book.description}
-						</p>
-					</div>
-					<div>
-						<p class="h3">Autores:</p>
-							<ui:repeat var="author" value="#{bookDetailBean.book.authors}">
-								#{author.name}<br />
-							</ui:repeat>
-					</div>
-					<div>
-						<p class="h3">Páginas:</p>
-							#{bookDetailBean.book.pages}
-					</div>
-					<div>
-						<p class="h3">Preço:</p>
-							R$ #{bookDetailBean.book.price}
-					</div>
-					<div>
-						<button type="button" class="btn btn-outline-primary btn-lg" style="padding: 15px 50px; font-size: 30px; font-weight: 500; Margin-top: 50px;">Comprar</button>
-					</div>
-				</div>
-			</div>
+			</h:form>
 		</div>
 	</body>
 </html>
